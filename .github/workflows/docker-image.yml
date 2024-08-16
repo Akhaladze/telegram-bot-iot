@@ -1,0 +1,21 @@
+name: Docker Image CI (Flask)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag flask-app-1:$(date +%s)
+#    - name: Push image to registry
+#      run: docker push flask-app-a: latest
+
