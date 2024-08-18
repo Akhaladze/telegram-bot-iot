@@ -7,13 +7,15 @@ services:
       dockerfile: Dockerfile
     volumes:
       - flask_telegram:/app
-    environment:
+    env_file: stack.env
       - PORT=5030
       - NODE_ENV=development
       - FLASK_APP=app.py
       - FLASK_ENV=development
       - FLASK_DEBUG=1
-      - TELEGRAM_BOT=6498892223:AAHkHja0P0_m8tg6Lx75vOA7db1sZpP03a0
+      - TELEGRAM_BOT={[$AUTH_TOKEN}}
+      - CHAT_ID=(($CHAT_ID))
+      - TELEGRAM_URL={{$TELEGRAM_URL}}
     command: flask -A app run -h 0.0.0.0 -p 5030  --reload --debug
     networks:
       proxy-network:
